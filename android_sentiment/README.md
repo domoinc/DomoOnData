@@ -1,7 +1,7 @@
 README
 ---
 
-This notebook was copied with permission from Kendall at https://github.com/kendall-bug/DoorDash_Reviews
+This notebook was copied with permission from Kendall Ruber at https://github.com/kendall-bug/DoorDash_Reviews
 
 To modify, replace the name of the app you are looking for sentiment on ('com.dd.doordash'), and change the name of the output dataset ('doordash jupyter')
 
