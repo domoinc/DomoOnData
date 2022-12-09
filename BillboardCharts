@@ -1,0 +1,43 @@
+import billboard
+import pandas as pd
+import domojupyter as domo
+
+#Documentation of the billboard.py package https://github.com/guoguo12/billboard-charts
+#must run in command line once: pip install billboard.py
+
+from datetime import date
+
+today = date.today()
+
+datelist=pd.date_range(end=today, periods=3, freq='W')
+#datelist=pd.date_range(end='1982-10-30', periods=100, freq='W')
+
+headers = ['rank','song','artist','image','peakPos','lastPos','weeks','isNew','chartname','chartdate']
+song_data = []
+
+for chartdate in datelist: 
+    
+    cleanchartdate=pd.to_datetime(chartdate)
+    
+    datetouse= (cleanchartdate.date())
+    
+    #dateasstring=datetouse.astype(str) 
+    
+    chart = billboard.ChartData('hot-100', datetouse )# chartdate)
+
+    for songrank in range(100):
+
+        song=chart[int(songrank)]
+
+        # don't want to create lists here
+        # removing the [] should solve the issue
+        
+        bendata=[song.rank,song.title,song.artist,song.image,song.peakPos,song.lastPos,song.weeks,song.isNew,chart.title,chart.date]
+        
+        song_data.append(bendata)
+
+df = pd.DataFrame(song_data, columns=headers)    
+
+  
+domo.write_dataframe (df,'BillboardCharts_History')
+
